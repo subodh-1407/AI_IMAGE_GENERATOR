@@ -27,7 +27,12 @@ const Navbar = () => {
 
   return (
     <Container>
-      IMAGINO
+       <div
+    style={{ cursor: "pointer" }}
+    onClick={() => navigate("/")}
+  >
+    IMAGINO
+  </div>
       {path[1] === "post" ? (
         <Button
           onClick={() => navigate("/")}
