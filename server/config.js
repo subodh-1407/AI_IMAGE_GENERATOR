@@ -6,4 +6,5 @@ export const config = {
   CLOUDINARY_API_SECRET: "r4OrIcL-DqCCCWx4_2BQxcbnDJ0",
   PORT: 8080,
   NODE_ENV: "development"
+
 }
