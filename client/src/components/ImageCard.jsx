@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Avatar } from "@mui/material";
-import { DownloadRounded } from "@mui/icons-material";
-import FileSaver from "file-saver";
+import React from "react"
+import styled from "styled-components"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import { Avatar } from "@mui/material"
+import { DownloadRounded } from "@mui/icons-material"
+import FileSaver from "file-saver"
 
 const Card = styled.div`
   position: relative;
@@ -20,7 +20,7 @@ const Card = styled.div`
     grid-column: auto/span 2;
     grid-row: auto/span 2;
   }
-`;
+`
 
 const HoverOverlay = styled.div`
   opacity: 0;
@@ -44,22 +44,29 @@ const HoverOverlay = styled.div`
   ${Card}:hover & {
     opacity: 1;
   }
-`;
+`
+
 const Prompt = styled.div`
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 15px;
   color: ${({ theme }) => theme.white};
-`;
+`
+
 const Author = styled.div`
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 14px;
   display: flex;
   gap: 8px;
   align-items: center;
   color: ${({ theme }) => theme.white};
-`;
+`
 
 const ImageCard = ({ item }) => {
+  const handleDownload = (e) => {
+    e.stopPropagation()
+    FileSaver.saveAs(item?.photo, `${item?.name || 'image'}.jpg`)
+  }
+
   return (
     <Card>
       <LazyLoadImage
@@ -80,17 +87,18 @@ const ImageCard = ({ item }) => {
         >
           <Author>
             <Avatar sx={{ width: "32px", height: "32px" }}>
-              {item?.name[0]}
+              {item?.name?.[0]?.toUpperCase() || "U"}
             </Avatar>
             {item?.name}
           </Author>
           <DownloadRounded
-            onClick={() => FileSaver.saveAs(item?.photo, "download.jpg")}
+            onClick={handleDownload}
+            style={{ cursor: "pointer" }}
           />
         </div>
       </HoverOverlay>
     </Card>
-  );
-};
+  )
+}
 
-export default ImageCard;
+export default ImageCard

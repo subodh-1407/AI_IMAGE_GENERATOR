@@ -1,8 +1,10 @@
-import express from "express";
-import { generateImage } from "../controllers/GenerateAIImage.js";
+import express from "express"
+import { generateImage } from "../controllers/GenerateAIImage.js" // Using Pollinations (Option 1)
+// import { generateImage } from "../controllers/GenerateAIImageHF.js" // For Hugging Face (Option 2)
+// import { generateImage } from "../controllers/GenerateAIImageMulti.js" // For Multiple Services (Option 3)
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/", generateImage);
+router.post("/", generateImage)
 
-export default router;
+export default router

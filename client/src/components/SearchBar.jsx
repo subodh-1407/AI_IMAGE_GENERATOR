@@ -1,6 +1,6 @@
-import React from "react";
-import { SearchOutlined } from "@mui/icons-material";
-import styled from "styled-components";
+import React from "react"
+import { SearchOutlined } from "@mui/icons-material"
+import styled from "styled-components"
 
 const SearchBarContainer = styled.div`
   max-width: 550px;
@@ -13,7 +13,7 @@ const SearchBarContainer = styled.div`
   cursor: pointer;
   gap: 6px;
   align-items: center;
-`;
+`
 
 const SearchBar = ({ search, setSearch }) => {
   return (
@@ -33,7 +33,7 @@ const SearchBar = ({ search, setSearch }) => {
         onChange={(e) => setSearch(e.target.value)}
       />
     </SearchBarContainer>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import SearchBar from "../components/SearchBar";
-import ImageCard from "../components/ImageCard";
-import { CircularProgress } from "@mui/material";
-import { GetPosts } from "../api";
+import React, { useEffect, useState } from "react"
+import styled from "styled-components"
+import SearchBar from "../components/SearchBar"
+import ImageCard from "../components/ImageCard"
+import { CircularProgress } from "@mui/material"
+import { GetPosts } from "../api"
 
 const Container = styled.div`
   height: 100%;
@@ -18,7 +18,7 @@ const Container = styled.div`
   @media (max-width: 768px) {
     padding: 6px 10px;
   }
-`;
+`
 
 const Headline = styled.div`
   font-size: 34px;
@@ -31,7 +31,8 @@ const Headline = styled.div`
   @media (max-width: 600px) {
     font-size: 22px;
   }
-`;
+`
+
 const Span = styled.div`
   font-size: 30px;
   font-weight: 800;
@@ -40,7 +41,7 @@ const Span = styled.div`
   @media (max-width: 600px) {
     font-size: 20px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -48,7 +49,7 @@ const Wrapper = styled.div`
   padding: 32px 0px;
   display: flex;
   justify-content: center;
-`;
+`
 
 const CardWrapper = styled.div`
   display: grid;
@@ -62,54 +63,51 @@ const CardWrapper = styled.div`
   @media (max-width: 639px) {
     grid-template-columns: repeat(2, 1fr);
   }
-`;
+`
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [search, setSearch] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [search, setSearch] = useState("")
+  const [filteredPosts, setFilteredPosts] = useState([])
 
   const getPosts = async () => {
-    setLoading(true);
-    await GetPosts()
-      .then((res) => {
-        setLoading(false);
-        setPosts(res?.data?.data);
-        setFilteredPosts(res?.data?.data);
-      })
-      .catch((error) => {
-        setError(error?.response?.data?.message);
-        setLoading(false);
-      });
-  };
+    setLoading(true)
+    setError("")
+
+    try {
+      const res = await GetPosts()
+      setPosts(res?.data?.data || [])
+      setFilteredPosts(res?.data?.data || [])
+    } catch (error) {
+      console.error("Get Posts Error:", error)
+      setError(error?.response?.data?.message || "Failed to fetch posts")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    getPosts();
-  }, []);
+    getPosts()
+  }, [])
 
-  //Search
+  // Search functionality
   useEffect(() => {
     if (!search) {
-      setFilteredPosts(posts);
+      setFilteredPosts(posts)
+      return
     }
 
-    const SearchFilteredPosts = posts.filter((post) => {
-      const promptMatch = post?.prompt
-        ?.toLowerCase()
-        .includes(search.toString().toLowerCase());
-      const authorMatch = post?.name
-        ?.toLowerCase()
-        .includes(search.toString().toLowerCase());
+    const searchFilteredPosts = posts.filter((post) => {
+      const promptMatch = post?.prompt?.toLowerCase().includes(search.toString().toLowerCase())
+      const authorMatch = post?.name?.toLowerCase().includes(search.toString().toLowerCase())
 
-      return promptMatch || authorMatch;
-    });
+      return promptMatch || authorMatch
+    })
 
-    if (search) {
-      setFilteredPosts(SearchFilteredPosts);
-    }
-  }, [posts, search]);
+    setFilteredPosts(searchFilteredPosts)
+  }, [posts, search])
 
   return (
     <Container>
@@ -132,7 +130,7 @@ const Home = () => {
                   .slice()
                   .reverse()
                   .map((item, index) => (
-                    <ImageCard key={index} item={item} />
+                    <ImageCard key={item._id || index} item={item} />
                   ))}
               </>
             )}
@@ -140,7 +138,7 @@ const Home = () => {
         )}
       </Wrapper>
     </Container>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

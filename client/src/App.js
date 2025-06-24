@@ -1,10 +1,9 @@
-import styled, { ThemeProvider } from "styled-components";
-import { darkTheme } from "./utils/Theme";
-import { lightTheme } from "./utils/Theme";
-import Home from "./pages/Home";
-import CreatePost from "./pages/CreatePost";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
+import styled, { ThemeProvider } from "styled-components"
+import { darkTheme } from "./utils/Theme"
+import Home from "./pages/Home"
+import CreatePost from "./pages/CreatePost"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Navbar from "./components/Navbar"
 
 const Container = styled.div`
   width: 100%;
@@ -15,7 +14,7 @@ const Container = styled.div`
   overflow-x: hidden;
   overflow-y: hidden;
   transition: all 0.2s ease;
-`;
+`
 
 const Wrapper = styled.div`
   height: 100%;
@@ -24,7 +23,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex: 3;
-`;
+`
 
 function App() {
   return (
@@ -34,14 +33,14 @@ function App() {
           <BrowserRouter>
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} exact />
-              <Route path="/post" element={<CreatePost />} exact />
+              <Route path="/" element={<Home />} />
+              <Route path="/post" element={<CreatePost />} />
             </Routes>
           </BrowserRouter>
         </Wrapper>
       </Container>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

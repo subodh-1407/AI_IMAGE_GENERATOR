@@ -20,7 +20,7 @@ export const darkTheme = {
   yellow: "#ffcc00",
   red: "#ef5350",
   orange: "#F7AD63",
-};
+}
 
 export const lightTheme = {
   bg: "#f9f9f9",
@@ -43,4 +43,4 @@ export const lightTheme = {
   yellow: "#e8ba00",
   red: "#ef5350",
   orange: "#F7AD63",
-};
+}

@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
-import { AddRounded, ExploreRounded } from "@mui/icons-material";
-import Button from "./button";
+import React from "react"
+import styled from "styled-components"
+import { useNavigate, useLocation } from "react-router-dom"
+import { AddRounded, ExploreRounded } from "@mui/icons-material"
+import Button from "./Button"  // ← Fixed this line
 
 const Container = styled.div`
   flex: 1;
@@ -18,12 +18,13 @@ const Container = styled.div`
   @media only screen and (max-width: 600px) {
     padding: 10px 12px;
   }
-`;
+`
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const path = location.pathname.split("/");
+  const navigate = useNavigate()
+  const location = useLocation()
+  const path = location.pathname.split("/")
+
   return (
     <Container>
       GenAI
@@ -54,7 +55,7 @@ const Navbar = () => {
         />
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

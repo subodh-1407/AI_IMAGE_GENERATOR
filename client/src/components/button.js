@@ -1,8 +1,9 @@
-import { CircularProgress } from "@mui/material";
-import React from "react";
-import styled from "styled-components";
+import { CircularProgress } from "@mui/material"
+import styled from "styled-components"
 
-const Button = styled.div`
+const ButtonContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isDisabled', 'isLoading', 'flex', 'type'].includes(prop),
+})`
   border-radius: 10px;
   color: white;
   font-size: 14px;
@@ -33,50 +34,36 @@ const Button = styled.div`
     `
   opacity: 0.4;
   cursor: not-allowed;
-
   `}
   ${({ isLoading }) =>
     isLoading &&
     `
     opacity: 0.8;
-  cursor: not-allowed;
+    cursor: not-allowed;
 `}
 ${({ flex }) =>
-    flex &&
-    `
+  flex &&
+  `
     flex: 1;
 `}
-`;
+`
 
-const button = ({
-  text,
-  isLoading,
-  isDisabled,
-  rightIcon,
-  leftIcon,
-  type,
-  onClick,
-  flex,
-}) => {
+const Button = ({ text, isLoading, isDisabled, rightIcon, leftIcon, type, onClick, flex }) => {
   return (
-    <Button
+    <ButtonContainer
       onClick={() => !isDisabled && !isLoading && onClick()}
       isDisabled={isDisabled}
       type={type}
       isLoading={isLoading}
       flex={flex}
     >
-      {isLoading && (
-        <CircularProgress
-          style={{ width: "18px", height: "18px", color: "inherit" }}
-        />
-      )}
+      {isLoading && <CircularProgress style={{ width: "18px", height: "18px", color: "inherit" }} />}
       {leftIcon}
       {text}
       {isLoading && <> . . .</>}
       {rightIcon}
-    </Button>
-  );
-};
+    </ButtonContainer>
+  )
+}
 
-export default button;
+export default Button
