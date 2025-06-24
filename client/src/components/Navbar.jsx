@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <Container>
-      GenAI
+      IMAGINO
       {path[1] === "post" ? (
         <Button
           onClick={() => navigate("/")}
